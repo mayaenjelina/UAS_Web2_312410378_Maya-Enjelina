@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Inventory System</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/vue-router@4/dist/vue-router.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    * { font-family: 'Inter', system-ui, sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    .fade-enter-active, .fade-leave-active { transition: opacity 0.15s ease; }
+    .fade-enter-from, .fade-leave-to { opacity: 0; }
+  </style>
+</head>
+<body class="bg-slate-950 text-white">
+
+  <div id="app">
+    <transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </transition>
+  </div>
+
+  <script type="module">
+    window.API_BASE_URL = 'http://localhost/einventory/backend-api/public/api';
+
+    // Set token saat halaman pertama kali dimuat
+    const savedToken = localStorage.getItem('token');
+    if (savedToken) {
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + savedToken;
+    }
+
+    // Request interceptor: otomatis suntikkan token ke setiap request
+    axios.interceptors.request.use(function(config) {
+      var token = localStorage.getItem('token');
+      if (token) {
+        config.headers['Authorization'] = 'Bearer ' + token;
+      }
+      return config;
+    }, function(error) {
+      return Promise.reject(error);
+    });
+
+    // Response interceptor: tangkap 401 dan redirect ke login
+    axios.interceptors.response.use(
+      function(response) { return response; },
+      function(error) {
+        if (error.response && error.response.status === 401) {
+          var token = localStorage.getItem('token');
+          if (token) {
+            alert('⚠️ Sesi Anda telah berakhir. Silakan login kembali.');
+            localStorage.removeItem('token');
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('name');
+            localStorage.removeItem('username');
+          }
+          if (window.__vueRouter__) {
+            window.__vueRouter__.push('/login');
+          } else {
+            window.location.hash = '/login';
+          }
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    import Home from './components/Home.js';
+    import Login from './components/Login.js';
+    import Dashboard from './components/Dashboard.js';
+    import Products from './components/Products.js';
+    import { Categories, StockHistory } from './components/Others.js';
+
+    const routes = [
+      { path: '/', component: Home },
+      { path: '/login', component: Login },
+      { path: '/dashboard', component: Dashboard, meta: { requiresAuth: true } },
+      { path: '/products', component: Products, meta: { requiresAuth: true } },
+      { path: '/categories', component: Categories, meta: { requiresAuth: true } },
+      { path: '/stock-history', component: StockHistory, meta: { requiresAuth: true } },
+      { path: '/:pathMatch(.*)*', redirect: '/' }
+    ];
+
+    const router = VueRouter.createRouter({
+      history: VueRouter.createWebHashHistory(),
+      routes,
+    });
+
+    window.__vueRouter__ = router;
+
+    router.beforeEach((to, from, next) => {
+      const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const token = localStorage.getItem('token');
+
+      if (requiresAuth && (!isLoggedIn || !token)) {
+        next('/login');
+      } else {
+        if (token) {
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        }
+        next();
+      }
+    });
+
+    const app = Vue.createApp({
+      template: `
+        <transition name="fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
+      `
+    });
+
+    app.use(router);
+    app.mount('#app');
+  </script>
+</body>
+</html>
