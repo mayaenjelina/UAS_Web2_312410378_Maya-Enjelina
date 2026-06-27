@@ -33,7 +33,7 @@ Proyek ini dibangun dengan arsitektur **terpisah antara Backend (REST API) dan F
 ## 🗄️ Skema Relasi Database
 Skema Relasi Database
 
-```
+
 ![Tabel Relasi](frontend-spa/components/assets/tabel_relasi.png)
 
 
@@ -56,33 +56,31 @@ Skema Relasi Database
 ### 1. Halaman Login
 
 > 📸 **[Lampirkan screenshot halaman `/login` ]**
-```
+
 ![login](frontend-spa/components/assets/login.png)
 
 
 ### 2. Halaman Dashboard Admin
 
 > 📸 **[Lampirkan screenshot halaman `/dashboard` setelah login ]**
-```
+
 ![Dashboard Admin](frontend-spa/components/assets/dashboard.png)
-```
+
 
 ### 3. Form Modal Tambah/Edit Data
 
 > 📸 **[Lampirkan screenshot manajemen produk dan tambah produk]**
-```
+
 ![Form Modal Tambah/Edit](frontend-spa/components/assets/manajemen_produk.png)
 ![Form Modal Tambah/Edit](frontend-spa/components/assets/tambah_produk.png)
-```
+
 
 ### 4. Visualisasi Data Tabel (TailwindCSS)
 
 > 📸 **[Lampirkan screenshot manajemen kategori, dan Histori Stok]**
-```
+
 ![Tabel Data](frontend-spa/components/assets/manajemen_kategori.png)
 ![Tabel Data](frontend-spa/components/assets/histori_stok.png)
-
-```
 
 ---
 
