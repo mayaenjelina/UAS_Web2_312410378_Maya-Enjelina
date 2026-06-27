@@ -55,14 +55,14 @@ Skema Relasi Database
 
 ### 1. Halaman Login
 
-> 📸 **[Lampirkan screenshot halaman `/login` di sini]**
+> 📸 **[Lampirkan screenshot halaman `/login` ]**
 ```
 ![login](frontend-spa/components/assets/login.png)
 ```
 
 ### 2. Halaman Dashboard Admin
 
-> 📸 **[Lampirkan screenshot halaman `/dashboard` setelah login di sini]**
+> 📸 **[Lampirkan screenshot halaman `/dashboard` setelah login ]**
 ```
 ![Dashboard Admin](frontend-spa/components/assets/dashboard.png)
 ```
