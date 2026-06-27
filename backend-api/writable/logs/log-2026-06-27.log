@@ -1,0 +1,9 @@
+CRITICAL - 2026-06-27 08:16:24 --> Error: Call to undefined method CodeIgniter\Database\MySQLi\Builder::find()
+[Method: DELETE, Route: api/categories/6]
+in APPPATH\Controllers\CategoryController.php on line 118.
+ 1 SYSTEMPATH\CodeIgniter.php(974): App\Controllers\CategoryController->delete('6')
+ 2 SYSTEMPATH\CodeIgniter.php(520): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CategoryController))
+ 3 SYSTEMPATH\CodeIgniter.php(363): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

@@ -34,8 +34,8 @@ Proyek ini dibangun dengan arsitektur **terpisah antara Backend (REST API) dan F
 Skema Relasi Database
 
 ```
-![Skema Relasi Database](frontend-spa/components/assets/tabel_relasi.png)
-```
+![Tabel Relasi](frontend-spa/components/assets/tabel_relasi.png)
+
 
 **Struktur tabel:**
 - `users` (id, username, password, name, token, created_at)
@@ -58,7 +58,7 @@ Skema Relasi Database
 > 📸 **[Lampirkan screenshot halaman `/login` ]**
 ```
 ![login](frontend-spa/components/assets/login.png)
-```
+
 
 ### 2. Halaman Dashboard Admin
 
@@ -147,9 +147,7 @@ http://localhost/einventory/frontend-spa/index.html
 
 | Jenis | Link |
 |---|---|
-| 🌐 Demo Aplikasi | `[Tempel link demo di sini, misal Netlify/hosting/ngrok]` |
-| 🎥 Video Presentasi | `[Tempel link video presentasi di sini, misal YouTube/Google Drive]` |
-
+| 🌐 Youtube| `[https://youtu.be/YXZVRHt-v5c]`
 ---
 
 ## 👤 Penyusun
